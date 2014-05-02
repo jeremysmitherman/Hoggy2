@@ -12,7 +12,9 @@ if Hoggy2.config.get('hoggy', 'dbtype') == 'mysql':
     engine = create_engine('mysql://%s:%s@%s:%s/%s' % (MSQLUname, MSQLPW, MSQLHost, MSQLPort, MSQLDB))
 else:
     SQLITEFILE = Hoggy2.config.get('hoggy', 'dbfile') 
-    engine = create_engine('sqlite:///%s' % SQLITEFILE)
+    engine = create_engine('sqlite:///%s' % SQLITEFILE,connect_args={'check_same_thread':False})
+
+
 
 Session = sessionmaker(bind=engine)
 session = Session()
