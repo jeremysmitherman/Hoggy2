@@ -2,6 +2,7 @@ from twisted.words.protocols import irc
 from twisted.internet import protocol, reactor
 import time, re
 import Hoggy2.core_actions as core
+import Hoggy2.utils.TwitchAdapter as twitch_adapter
 
 class GrabberException(Exception):
     pass
@@ -41,6 +42,8 @@ class HoggyBot(irc.IRCClient):
         self.log = log
         self.config = config
         self.grabber = Grabber()
+        self.twitch_adapter = twitch_adapter.TwitchAdapter(self, self.config.get("irc","channel"))
+        
 
         # assign the quote action to be !<name_of_bot>
         core.Action.actions["!%s" % config.get('irc','nick')] = core.hoggy
@@ -63,6 +66,7 @@ class HoggyBot(irc.IRCClient):
         if self.password:
             self.log.debug("Logging in with password.")
             self.msg('NickServ', 'IDENTIFY %s' % self.password)
+        self.twitch_adapter.start()
 
     def privmsg(self, user, channel, msg):
         """This will get called when the bot receives a message."""

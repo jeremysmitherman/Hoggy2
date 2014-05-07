@@ -4,6 +4,7 @@ import random, time, requests, praw, re
 from time import gmtime
 import Hoggy2.models.time as time_model
 import Hoggy2.models.quote as quote
+import Hoggy2.models.twitchstream as twitchstream
 
 def get_adjusted_time(adjustment):
     adj = gmtime(time.time()+adjustment*60*60)
@@ -386,6 +387,47 @@ class drhoggy(Action):
         keys = res['acute_analysis']['results']['diagnoses'].viewkeys()
         return "According to my expert medical knowledge, being an IRC bot and all, it looks like " + ", or ".join(keys) + ", or it could always just be a small case of %s" % choice(["Lupus", "Cancer"])
 
+class twitch(Action):
+
+    def shortdesc(self):
+        return "Monitors your twitch channel"
+
+    def longdesc(self):
+        return "Usage- `!twitch remove` removes your set channel. `!twitch <twitch_url>` adds your twitch channel. `!twitch` lists what your channel currently is"
+
+    def execute(self,bot,user,channel, args):
+        dao = twitchstream.TwitchDAO()
+        if len(args) == 1:
+            if args[0].lower() == 'remove':
+                try:
+                    #removing the current users twitch
+                    dao.remove_stream_for_user(user)
+                    return "Removed your stream, {0}".format(user)
+                except:
+                    return "I couldn't delete your stream, maybe you never had one?"
+            else:
+                #Check if they have a stream already.
+                stream = dao.get_stream_for_user(user)
+                delete = False
+                if stream != None:
+                    dao.remove_stream_for_user(user)
+                    bot.msg(channel,"Removed stream with url {0}".format(stream.streamurl))
+
+                stream_url = args[0]
+                dao.add_stream_for_user(user, stream_url)
+                return "Added stream {0}".format(stream_url)
+
+        elif len(args) == 0:
+            #Just checking
+            stream = dao.get_stream_for_user(user)
+            if stream == None:
+                return "I don't have a stream for you, {0}. Add one using !twitch <twitch_url>!".format(user)
+            return "I have {0} for your stream, {1}".format(stream.streamurl,user)
+        else:
+            return "RTFM kthnxbye"
+
+
+
 Action.actions = {
     "!ping": ping,
     "!ron": ron,
@@ -403,6 +445,7 @@ Action.actions = {
     "!choose": choose,
     "!catfact": catfacts,
     "!drhoggy": drhoggy
+    "!twitch": twitch
 }
 
 import Hoggy2.action_plugins
