@@ -361,6 +361,30 @@ class grab(Action):
         h = hoggy()
         return h.execute(bot, user, channel, ["add", quote])
 
+class catfacts(Action):
+    def shortdesc(self):
+        return "Get facts about cats!"
+
+    def longdesc(self):
+        return "Cat facts!  What's not to love?"
+
+    def execute(self, bot, user, channel, args):
+        r = requests.get("http://catfacts-api.appspot.com/api/facts")
+        return r.json()["facts"][0]
+
+class drhoggy(Action):
+    def shortdesc(self):
+        return "Ask Dr. Hoggy about your ailments"
+
+    def longdesc(self):
+        return "It's probably AIDS"
+
+    def execute(self, bot, user, channel, args):
+        r = requests.get("http://api.medgle.com/1/getinfo.json?q=%s" % " ".join(args))
+        to_return = ""
+        res = r.json()
+        keys = res['acute_analysis']['results']['diagnoses'].viewkeys()
+        return "According to my expert medical knowledge, being an IRC bot and all, it looks like " + ", or ".join(keys) + ", or it could always just be a small case of %s" % choice(["Lupus", "Cancer"])
 
 Action.actions = {
     "!ping": ping,
@@ -376,7 +400,9 @@ Action.actions = {
     "!grab": grab,
     "!hug": hug,
     "!roll": roll,
-    "!choose": choose
+    "!choose": choose,
+    "!catfact": catfacts,
+    "!drhoggy": drhoggy
 }
 
 import Hoggy2.action_plugins
