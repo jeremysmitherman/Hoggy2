@@ -215,12 +215,12 @@ class hoggy(Action):
                 return_quote = quote.Quote.get_quote(id=command)
                 if return_quote is None:
                     return "Nothing found for %s" % command
-                return "%s (%s)" % (return_quote.body, return_quote.id)
+                return "%s (# %s)" % (return_quote.body, return_quote.id)
 
             if command == "add":
                 return_quote = " ".join(args[1:])
-                id = quote.Quote.add_quote(quote)
-                return "Added %s (#%s)" % (quote, id)
+                id = quote.Quote.add_quote(return_quote)
+                return "Added %s (# %s)" % (return_quote.body, id)
 
             if command == "search":
                 terms = " ".join(args[1:])
