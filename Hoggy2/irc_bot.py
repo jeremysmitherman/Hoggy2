@@ -47,6 +47,7 @@ class HoggyBot(irc.IRCClient):
 
         # assign the quote action to be !<name_of_bot>
         core.Action.actions["!%s" % config.get('irc','nick')] = core.hoggy
+        core.Action.actions["!%s" % config.get('irc','nick').lower()] = core.hoggy
 
     def connectionMade(self):
         irc.IRCClient.connectionMade(self)
