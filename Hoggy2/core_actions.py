@@ -444,7 +444,7 @@ Action.actions = {
     "!roll": roll,
     "!choose": choose,
     "!catfact": catfacts,
-    "!drhoggy": drhoggy
+    "!drhoggy": drhoggy,
     "!twitch": twitch
 }
 
