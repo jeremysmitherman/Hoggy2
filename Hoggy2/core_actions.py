@@ -220,7 +220,7 @@ class hoggy(Action):
             if command == "add":
                 return_quote = " ".join(args[1:])
                 id = quote.Quote.add_quote(return_quote)
-                return "Added %s (# %s)" % (return_quote.body, id)
+                return "Added %s (# %s)" % (return_quote, id)
 
             if command == "search":
                 terms = " ".join(args[1:])
