@@ -371,7 +371,7 @@ class catfacts(Action):
 
     def execute(self, bot, user, channel, args):
         r = requests.get("http://catfacts-api.appspot.com/api/facts")
-        return r.json()["facts"][0]
+        return unicode(r.json()["facts"][0])
 
 class drhoggy(Action):
     def shortdesc(self):
