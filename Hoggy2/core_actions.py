@@ -384,8 +384,11 @@ class drhoggy(Action):
         r = requests.get("http://api.medgle.com/1/getinfo.json?q=%s" % " ".join(args))
         to_return = ""
         res = r.json()
-        keys = res['acute_analysis']['results']['diagnoses'].viewkeys()
-        return "According to my expert medical knowledge, being an IRC bot and all, it looks like " + ", or ".join(keys) + ", or it could always just be a small case of %s" % choice(["Lupus", "Cancer"])
+        try:
+            keys = res['acute_analysis']['results']['diagnoses'].viewkeys()
+        except:
+            return "According to my expert medical knowledge, being an IRC bot and all, it looks like i'm going to have to refer you to a specialist"
+        return "According to my expert medical knowledge, being an IRC bot and all, it looks like " + ", or ".join(keys) + ", or it could always just be a small case of %s" % choice(["Lupus", "Cancer", "your mom being fat"])
 
 class twitch(Action):
 
