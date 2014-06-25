@@ -11,7 +11,7 @@ class Quote(meta.base):
     def get_quote(cls, id = None):
         try:
             if id is None:
-                id = randint(1,meta.session.query(cls).count())
+                return meta.session.query(cls).order_by(func.random()).one()
             return meta.session.query(cls).get(id)
         except:
             meta.session.rollback()
