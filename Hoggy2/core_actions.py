@@ -276,8 +276,8 @@ class roll(Action):
             darray = args[0].split("d")
             numdice = int(float(darray[0]))
             numsides = int(float(darray[1]))
-            if numdice <= 0 or numdice > 10 or numsides <= 0 or numsides > 100 or (float(darray[0]) != int(darray[0])) or (float(darray[1]) != int(darray[1])) :
-                return "You gotta throw at least 1 die, throw no more than 10, it needs at least 1 side, and no more than 100."
+            if numdice <= 0 or numdice > 20 or numsides <= 1 or numsides > 1000 or (float(darray[0]) != int(darray[0])) or (float(darray[1]) != int(darray[1])) :
+                return "You gotta throw at least 1 die, throw no more than 20, it needs at least 2 sides, and no more than 1000."
 
             dice = []
             total = 0
