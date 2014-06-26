@@ -125,7 +125,7 @@ class HoggyBot(irc.IRCClient):
                         title = title.encode("utf-8","ignore")
                         try:
                             return "Title: {0}".format(title)
-			            except:
+			except:
                             pass
 
         self.grabber.stack(user, msg)
