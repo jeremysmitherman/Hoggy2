@@ -98,35 +98,19 @@ class HoggyBot(irc.IRCClient):
                 response = "Hoozin'ed it up: unexpected exception: {0}".format(str(ex))
             
         else:
-            matches = re.findall("(^|\s)/?((r|u)/[a-zA-Z0-9_]+)",message)
-            if len(matches) > 0:
-                links = ""
-                for match in matches:
-                    links += "http://reddit.com/%s " % match[1]
-                return links
+            if ' r/' in message or '/r/' in message:
+            	obj = re.search(r'[/]?r/[^\s\n]*',message)
+            	sub = obj.group()
+            	if sub.startswith('/'):
+            		sub = sub[1:]
+            	response = "http://reddit.com/%s" % sub
             
-            if "http" in message:
-                parts = message.split()
-                for part in parts:
-                    if part.startswith('http:') or part.startswith('https:'):
-                        html_parser = HTMLParser.HTMLParser()
-                        head = {
-                            "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.76 Safari/537.36",
-                            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-                            "Accept-Language": "en-US,en;q=0.8",
-                            "Cache-Control": "max-age=0",
-                            "Connection": "keep-alive"
-                        }
-                        req = urllib2.Request(part, headers=head)
-                        soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen(req))
-                        title = html_parser.unescape(soup.title.string)
-                        title = title.replace("\n","").replace("\r","").strip()
-                        title = ' '.join(title.split())
-                        title = title.encode("utf-8","ignore")
-                        try:
-                            return "Title: {0}".format(title)
-			except:
-                            pass
+            if  ' u/' in message or '/u/' in message:
+            	obj = re.search(r'[/]?u/[^\s\n]*',message)
+            	sub = obj.group()
+            	if sub.startswith('/'):
+            		sub = sub[1:]
+            response = "http://reddit.com/%s" % sub
 
         self.grabber.stack(user, msg)
 
