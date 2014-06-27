@@ -270,7 +270,7 @@ class euphoric(Action):
         return "[EUPHORIC INTENSIFIES]"
     
     def execute(self, bot, user, channel, args):
-        return "In this moment, I am euphoric. Not because of any phony god’s blessing. But because, I am enlightened by %s ." % user
+        return "In this moment, I am euphoric. Not because of any phony gods blessing. But because, I am enlightened by %s ." % user
     
 class fedora(Action):
     def shortdesc(self):
@@ -285,11 +285,11 @@ class fedora(Action):
         except:
             target = None
         
-         bot.msg(channel,"/me tips his fedora in appreciation")
+        bot.msg(channel,"/me tips his fedora in appreciation")
          
         if target is not None:
            return "Thanks, %s" % target
-        else
+        else:
             return "M'lady"
 
 class roll(Action):
