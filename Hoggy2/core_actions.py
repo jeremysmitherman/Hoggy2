@@ -262,6 +262,36 @@ class hug(Action):
         else:
             return "%s gives %s a lingering hug. %s likes it. Likes it a lot...\nThey continue their embrace, %s gently stroking %s's face, and %s leans in for a kiss." % (user, target, target, target, user, user)
 
+class euphoric(Action):
+    def shortdesc(self):
+        return "M'lady"
+    
+    def longdesc(self):
+        return "[EUPHORIC INTENSIFIES]"
+    
+    def execute(self, bot, user, channel, args):
+        return "In this moment, I am euphoric. Not because of any phony god’s blessing. But because, I am enlightened by %s ." % user
+    
+class fedora(Action):
+    def shortdesc(self):
+        return "Shows appreciation"
+    
+    def longdesc(self):
+        return "When you need to show your appreciation. Can select a target."
+        
+    def execute(self, bot, user, channel, args):
+        try:
+            target = args[0]
+        except:
+            target = None
+        
+         bot.msg(channel,"/me tips his fedora in appreciation")
+         
+        if target is not None:
+           return "Thanks, %s" % target
+        else
+            return "M'lady"
+
 class roll(Action):
     def shortdesc(self):
         return "Roll them bones"
@@ -448,7 +478,9 @@ Action.actions = {
     "!choose": choose,
     "!catfact": catfacts,
     "!drhoggy": drhoggy,
-    "!twitch": twitch
+    "!twitch": twitch,
+    "!euphoric": euphoric,
+    "!tiphat": fedora
 }
 
 import Hoggy2.action_plugins
