@@ -1,3 +1,5 @@
+import sys
+sys.path.append("..")
 import irc_bot, Hoggy2
 from twisted.internet import reactor
 

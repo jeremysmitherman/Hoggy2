@@ -99,18 +99,18 @@ class HoggyBot(irc.IRCClient):
             
         else:
             if ' r/' in message or '/r/' in message:
-            	obj = re.search(r'[/]?r/[^\s\n]*',message)
-            	sub = obj.group()
-            	if sub.startswith('/'):
-            		sub = sub[1:]
-            	response = "http://reddit.com/%s" % sub
+                obj = re.search(r'[/]?r/[^\s\n]*',message)
+                sub = obj.group()
+                if sub.startswith('/'):
+                    sub = sub[1:]
+                response = "http://reddit.com/%s" % sub
             
             if  ' u/' in message or '/u/' in message:
-            	obj = re.search(r'[/]?u/[^\s\n]*',message)
-            	sub = obj.group()
-            	if sub.startswith('/'):
-            		sub = sub[1:]
-            response = "http://reddit.com/%s" % sub
+                obj = re.search(r'[/]?u/[^\s\n]*',message)
+                sub = obj.group()
+                if sub.startswith('/'):
+                    sub = sub[1:]
+                response = "http://reddit.com/%s" % sub
 
         self.grabber.stack(user, msg)
 

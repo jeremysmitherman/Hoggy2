@@ -14,8 +14,6 @@ else:
     SQLITEFILE = Hoggy2.config.get('hoggy', 'dbfile') 
     engine = create_engine('sqlite:///%s' % SQLITEFILE,connect_args={'check_same_thread':False})
 
-
-
 Session = sessionmaker(bind=engine)
 session = Session()
 base = declarative_base()

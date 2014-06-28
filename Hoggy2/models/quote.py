@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text, func
 from random import randint
 import Hoggy2.meta as meta
 
@@ -11,7 +11,7 @@ class Quote(meta.base):
     def get_quote(cls, id = None):
         try:
             if id is None:
-                return meta.session.query(cls).order_by(func.random()).one()
+                return meta.session.query(cls).order_by(func.random()).limit(1).one()
             return meta.session.query(cls).get(id)
         except:
             meta.session.rollback()
