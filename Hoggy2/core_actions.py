@@ -271,7 +271,7 @@ class euphoric(Action):
     
     def execute(self, bot, user, channel, args):
         try:
-            target = args[0]
+            target = " ".join(args)
         except:
             target = user
         
@@ -286,7 +286,7 @@ class fedora(Action):
         
     def execute(self, bot, user, channel, args):
         try:
-            target = args[0]
+            target = " ".join(args)
         except:
             target = None
         
