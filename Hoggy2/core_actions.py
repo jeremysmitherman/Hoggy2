@@ -275,7 +275,7 @@ class euphoric(Action):
         except:
             target = user
         
-        return "In this moment, I am euphoric. Not because of any phony gods blessing. But because, I am enlightened by %s ." % target
+        return "In this moment, I am euphoric. Not because of any phony gods blessing. But because, I am enlightened by %s." % target
     
 class fedora(Action):
     def shortdesc(self):
@@ -418,8 +418,8 @@ class drhoggy(Action):
     def execute(self, bot, user, channel, args):
         r = requests.get("http://api.medgle.com/1/getinfo.json?q=%s" % " ".join(args))
         to_return = ""
-        res = r.json()
         try:
+            res = r.json()
             keys = res['acute_analysis']['results']['diagnoses'].viewkeys()
         except:
             return "According to my expert medical knowledge, being an IRC bot and all, it looks like i'm going to have to refer you to a specialist"
