@@ -270,9 +270,9 @@ class euphoric(Action):
         return "[EUPHORIC INTENSIFIES]"
     
     def execute(self, bot, user, channel, args):
-        try:
+        if args:
             target = " ".join(args)
-        except:
+        else:
             target = user
         
         return "In this moment, I am euphoric. Not because of any phony gods blessing. But because, I am enlightened by %s." % target
@@ -285,9 +285,9 @@ class fedora(Action):
         return "When you need to show your appreciation. Can select a target."
         
     def execute(self, bot, user, channel, args):
-        try:
+        if args:
             target = " ".join(args)
-        except:
+        else:
             target = None
         
         bot.describe(channel,"tips his fedora in appreciation")
