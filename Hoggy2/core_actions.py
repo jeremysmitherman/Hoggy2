@@ -296,6 +296,17 @@ class fedora(Action):
            return "Thanks, %s" % target
         else:
             return "M'lady"
+            
+class coolstory(Action):
+    def shortdesc(self):
+        return "cool story bro"
+
+    def longdesc(self):
+        return "What an amazing epic you have written my friend"
+
+    def execute(self, bot, user, channel, args):
+        return choice(["Cool Story Bro.", "Riveting Tale Chap", "Captivating Anecdote Kinsman", "Enthralling tale sire", "Extraordinary chain of events, friend", "Glorious exposition, comrade", " Interesting recapitulation of events friend", "Stunningly retold rendition old sport", "Intriguing rendition of past events, senor", "Engrossing narrative bloke"])
+
 
 class roll(Action):
     def shortdesc(self):
@@ -339,7 +350,7 @@ class choose(Action):
             return "You gotta give me some choices!"
 
         temp = ' '.join([str(x) for x in args])
-        return "Hmm, let's go with {0}".format(choice(temp.split("or")).strip())
+        return "Hmm, let's go with {0}".format(choice(temp.split(" or ")).strip())
 
 class ron(Action):
     def shortdesc(self):
@@ -486,6 +497,7 @@ Action.actions = {
     "!twitch": twitch,
     "!euphoric": euphoric,
     "!tiphat": fedora
+    "!coolstory": coolstory
 }
 
 import Hoggy2.action_plugins
