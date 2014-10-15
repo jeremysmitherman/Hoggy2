@@ -115,7 +115,11 @@ class urbandictionary(Action):
         defs = json['list']
         if not len(defs):
             return "No definintions found.  Try !eject."
-        return "{0}: {1}".format(" ".join(args), defs[0]['definition'].encode('utf-8'))
+        for currentDef in defs:
+            encodedDef = currentDef['definition'].encode('utf-8')
+            if len(encodedDef) < 141:
+                return "{0}: {1}".format(" ".join(args), encodedDef)
+        return "I'm sorry, {0}. I'm afraid I can't do that.".format(user)
 
 class new(Action):
     def shortdesc(self):
