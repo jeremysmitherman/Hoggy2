@@ -38,6 +38,7 @@ class HoggyBot(irc.IRCClient):
     
     def __init__(self, config, log, *args, **kwargs):
         self.nickname = config.get("irc", "nick")
+	self.username = config.get("irc", "nick")
         self.password = config.get("irc", "password")
         self.log = log
         self.config = config
@@ -66,7 +67,7 @@ class HoggyBot(irc.IRCClient):
     def joined(self, channel):
         if self.password:
             self.log.debug("Logging in with password.")
-            self.msg('NickServ', 'IDENTIFY %s' % self.password)
+            #self.msg('NickServ', 'IDENTIFY %s' % self.password)
         self.twitch_adapter.start()
 
     def privmsg(self, user, channel, msg):
@@ -158,8 +159,8 @@ class HoggyBotFactory(protocol.ClientFactory):
 
     def clientConnectionLost(self, connector, reason):
         """If we get disconnected, reconnect to server."""
-        connector.connect()
-
+        #connector.connect()
+	print reason
     def clientConnectionFailed(self, connector, reason):
         print "connection failed:", reason
         reactor.stop()

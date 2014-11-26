@@ -47,7 +47,7 @@ class settime(Action):
     wanted = "!settime [UTC|GMT][+|-]hours"
 
     def longdesc(self):
-        return wanted
+        return self.wanted
 
     def execute(self, bot, user, channel, args):
         time = " ".join(args)
@@ -196,6 +196,16 @@ class eject(Action):
     def execute(self, bot, user, channel, args):
         bot.kick('hoggit', user, 'Ejecting!')
         return "EJECT! EJECT! EJECT! {0} punched out!".format(user)
+
+class help(Action):
+    def shortdesc(self):
+        return "Helpception"
+
+    def longdesc(self):
+        return "BWAAAAAOOONNNNNNNGGGGGG!!!"
+
+    def execute(self, bot, user, channel, args):
+        return bot.config.get('hoggy', 'help_url')
 
 class hoggy(Action):
     """
@@ -485,7 +495,8 @@ Action.actions = {
     "!drhoggy": drhoggy,
     "!twitch": twitch,
     "!euphoric": euphoric,
-    "!tiphat": fedora
+    "!tiphat": fedora,
+    "!help": help
 }
 
 import Hoggy2.action_plugins
