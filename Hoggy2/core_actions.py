@@ -521,8 +521,8 @@ Action.actions = {
     "!twitch": twitch,
     "!euphoric": euphoric,
     "!tiphat": fedora,
-    "!help": help
-    "!coolstory": coolstory
-    "!jawafact": jawafacts,
+    "!help": help,
+    "!coolstory": coolstory,
+    "!jawafact": jawafacts
 
 import Hoggy2.action_plugins
