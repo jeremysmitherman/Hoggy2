@@ -115,7 +115,11 @@ class urbandictionary(Action):
         defs = json['list']
         if not len(defs):
             return "No definintions found.  Try !eject."
-        return "{0}: {1}".format(" ".join(args), defs[0]['definition'].encode('utf-8'))
+        for currentDef in defs:
+            encodedDef = currentDef['definition'].encode('utf-8')
+            if len(encodedDef) < 141:
+                return "{0}: {1}".format(" ".join(args), encodedDef)
+        return "I'm sorry, {0}. I'm afraid I can't do that.".format(user)
 
 class new(Action):
     def shortdesc(self):
@@ -280,9 +284,9 @@ class euphoric(Action):
         return "[EUPHORIC INTENSIFIES]"
     
     def execute(self, bot, user, channel, args):
-        try:
+        if args:
             target = " ".join(args)
-        except:
+        else:
             target = user
         
         return "In this moment, I am euphoric. Not because of any phony gods blessing. But because, I am enlightened by %s." % target
@@ -295,9 +299,9 @@ class fedora(Action):
         return "When you need to show your appreciation. Can select a target."
         
     def execute(self, bot, user, channel, args):
-        try:
+        if args:
             target = " ".join(args)
-        except:
+        else:
             target = None
         
         bot.describe(channel,"tips his fedora in appreciation")
@@ -306,6 +310,17 @@ class fedora(Action):
            return "Thanks, %s" % target
         else:
             return "M'lady"
+            
+class coolstory(Action):
+    def shortdesc(self):
+        return "cool story bro"
+
+    def longdesc(self):
+        return "What an amazing epic you have written my friend"
+
+    def execute(self, bot, user, channel, args):
+        return choice(["Cool Story Bro.", "Riveting Tale Chap", "Captivating Anecdote Kinsman", "Enthralling tale sire", "Extraordinary chain of events, friend", "Glorious exposition, comrade", " Interesting recapitulation of events friend", "Stunningly retold rendition old sport", "Intriguing rendition of past events, senor", "Engrossing narrative bloke"])
+
 
 class roll(Action):
     def shortdesc(self):
@@ -349,7 +364,7 @@ class choose(Action):
             return "You gotta give me some choices!"
 
         temp = ' '.join([str(x) for x in args])
-        return "Hmm, let's go with {0}".format(choice(temp.split("or")).strip())
+        return "Hmm, let's go with {0}".format(choice(temp.split(" or ")).strip())
 
 class ron(Action):
     def shortdesc(self):
@@ -497,6 +512,7 @@ Action.actions = {
     "!euphoric": euphoric,
     "!tiphat": fedora,
     "!help": help
+    "!coolstory": coolstory
 }
 
 import Hoggy2.action_plugins
