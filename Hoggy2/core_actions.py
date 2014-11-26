@@ -490,6 +490,16 @@ class twitch(Action):
             return "RTFM kthnxbye"
 
 
+class jawafacts(Action):
+    def shortdesc(self):
+        return "Get facts about jawas!"
+        
+    def longsec(self):
+        return "Jawa facts! What's not to love?"
+        
+    def execute(self, bot, user, channel, args):
+        return "Wootini!"
+
 
 Action.actions = {
     "!ping": ping,
@@ -513,6 +523,6 @@ Action.actions = {
     "!tiphat": fedora,
     "!help": help
     "!coolstory": coolstory
-}
+    "!jawafact": jawafacts,
 
 import Hoggy2.action_plugins
