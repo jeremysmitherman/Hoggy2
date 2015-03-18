@@ -494,7 +494,7 @@ class jawafacts(Action):
     def shortdesc(self):
         return "Get facts about jawas!"
         
-    def longsec(self):
+    def longdesc(self):
         return "Jawa facts! What's not to love?"
         
     def execute(self, bot, user, channel, args):
@@ -524,5 +524,6 @@ Action.actions = {
     "!help": help,
     "!coolstory": coolstory,
     "!jawafact": jawafacts
+}
 
 import Hoggy2.action_plugins
